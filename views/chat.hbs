@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/bower_components/semantic/dist/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="/bower_components/toastr/toastr.min.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link href="/css/emoji.css" rel="stylesheet">
   <title>Chat: Omeclone</title>
 </head>
 
@@ -64,7 +65,7 @@
           <span>New</span>
         </button>
       </a>
-      <input type="text" placeholder="Please wait for another user..." id="message" disabled="true" tabindex="0">
+      <input type="text" placeholder="Please wait for another user..." id="message" disabled="true" tabindex="0" data-emojiable="true">
       <button class="ui teal labeled icon button" id="sendbtn">
         <i class="fitted send icon"></i>
         <span class="txt">Send</span>
@@ -76,6 +77,29 @@
       </a>
     </div>
   </div>
+   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Begin emoji-picker JavaScript -->
+    <script src="/js/config.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/jquery.emojiarea.js"></script>
+    <script src="/js/emoji-picker.js"></script>
+    <!-- End emoji-picker JavaScript -->
+
+    <script>
+      $(function() {
+        // Initializes and creates emoji set from sprite sheet
+        window.emojiPicker = new EmojiPicker({
+          emojiable_selector: '[data-emojiable=true]',
+          assetsPath: '/images/',
+          popupButtonClasses: 'fa fa-smile-o'
+        });
+        // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+        // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+        // It can be called as many times as necessary; previously converted input fields will not be converted again
+        window.emojiPicker.discover();
+      });
+    </script>
 </body>
 <script src="/bower_components/Autolinker.js/dist/Autolinker.min.js"></script>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
